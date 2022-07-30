@@ -31,7 +31,7 @@ private:
     SDL_Point mPosition;
 };
 
-extern SDL_Rect gSpriteClips[BUTTON_SPRITE_TOTAL];
+extern SDL_Rect gmediumSpriteClips[BUTTON_SPRITE_TOTAL];
 
 extern Lmediumgameplay gmediumgameplayButtons[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 

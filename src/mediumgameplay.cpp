@@ -18,7 +18,7 @@ Lmediumgameplay gmediumloadscreen;
 
 Mix_Chunk *click = NULL;
 
-SDL_Rect gSpriteClips[BUTTON_SPRITE_TOTAL];
+SDL_Rect gmediumSpriteClips[BUTTON_SPRITE_TOTAL];
 
 Lmediumgameplay::Lmediumgameplay()
 {
@@ -49,10 +49,10 @@ void Lmediumgameplay::mediumloadmedia()
         // Set sprites
         for (int i = 0; i < BUTTON_SPRITE_TOTAL; i++)
         {
-            gSpriteClips[i].x = i * 32;
-            gSpriteClips[i].y = 0;
-            gSpriteClips[i].w = MEDIUM_TILE_SIZE;
-            gSpriteClips[i].h = MEDIUM_TILE_SIZE;
+            gmediumSpriteClips[i].x = i * 32;
+            gmediumSpriteClips[i].y = 0;
+            gmediumSpriteClips[i].w = MEDIUM_TILE_SIZE;
+            gmediumSpriteClips[i].h = MEDIUM_TILE_SIZE;
         }
         // Set buttons position
         for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
@@ -68,7 +68,7 @@ void Lmediumgameplay::mediumloadmedia()
 void Lmediumgameplay::render(int i, int j)
 {
     // Show current button sprite
-    gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gSpriteClips[sBoard[i][j]]);
+    gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gmediumSpriteClips[sBoard[i][j]]);
 }
 
 void reveal(int i, int j)

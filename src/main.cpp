@@ -1,5 +1,6 @@
 #include "window.hpp"
 #include "difficultymenu.hpp"
+#include "mediumgameplay.hpp"
 // Loads media
 bool loadMedia();
 
@@ -17,6 +18,7 @@ bool loadMedia()
         printf("Failed to load texture image!\n");
         success = false;
     }
+    gmediumloadscreen.mediumloadmedia();
 
     return success;
 }
@@ -69,7 +71,7 @@ int main(int argc, char *args[])
                     }
                     gdifficultymenu.handleEvent(&e);
                 }
-                
+
                 // clear screen
                 SDL_RenderClear(gRenderer);
                 // Render texture to screen

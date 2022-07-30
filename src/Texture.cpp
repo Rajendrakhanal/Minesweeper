@@ -128,3 +128,5 @@ int LTexture::getHeight()
 }
 
 LTexture gdifficultymenuTexture;
+LTexture gButtonSpriteSheetTexture;
+LTexture gBackgroundTexture;

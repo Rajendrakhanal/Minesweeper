@@ -43,4 +43,6 @@ private:
     int mHeight;
 };
 
- extern LTexture gdifficultymenuTexture;
+extern LTexture gdifficultymenuTexture;
+extern LTexture gButtonSpriteSheetTexture;
+extern LTexture gBackgroundTexture;

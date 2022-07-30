@@ -27,7 +27,7 @@ bool loadMedia()
         success = false;
     }
     // Open the font
-    gGameOver = TTF_OpenFont("DTM-Sans.ttf", 23);
+    gGameOver = TTF_OpenFont("../bin/FONT/DTM-Sans.ttf", 23);
     if (gGameOver == NULL)
     {
         cout << "Failed to load DTM-Sans font! SDL_ttf Error: " << TTF_GetError() << endl;
@@ -44,7 +44,7 @@ bool loadMedia()
         }
     }
 
-    gPlayAgainWin = TTF_OpenFont("DTM-Sans.ttf", 40);
+    gPlayAgainWin = TTF_OpenFont("../bin/FONT/DTM-Sans.ttf", 40);
     if (gPlayAgainWin == NULL)
     {
         cout << "Failed to load DTM-Sans font! SDL_ttf Error: " << TTF_GetError() << endl;
@@ -61,7 +61,7 @@ bool loadMedia()
         }
     }
 
-    gPlayAgainLose = TTF_OpenFont("DTM-Sans.ttf", 40);
+    gPlayAgainLose = TTF_OpenFont("../bin/FONT/DTM-Sans.ttf", 40);
     if (gPlayAgainLose == NULL)
     {
         cout << "Failed to load DTM-Sans font! SDL_ttf Error: " << TTF_GetError() << endl;

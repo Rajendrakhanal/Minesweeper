@@ -2,11 +2,14 @@
 #include "Texture.hpp"
 #include "window.hpp"
 
-const int BUTTON_SPRITE_TOTAL = 12;
+const int MEDIUM_BUTTON_SPRITE_TOTAL =12;
 const int MEDIUM_ROW_SIZE = 10;
 const int MEDIUM_COLUMN_SIZE = 10;
 const int MEDIUM_TILE_SIZE = 32;
 const int MEDIUM_MINE_COUNT = 12;
+
+extern bool gameOver ;
+extern bool isWinning;
 
 const int MEDIUM_DISTANCE_BETWEEN = (SCREEN_WIDTH - MEDIUM_ROW_SIZE * MEDIUM_TILE_SIZE) / 2;
 
@@ -31,7 +34,7 @@ private:
     SDL_Point mPosition;
 };
 
-extern SDL_Rect gmediumSpriteClips[BUTTON_SPRITE_TOTAL];
+extern SDL_Rect gmediumSpriteClips[MEDIUM_BUTTON_SPRITE_TOTAL];
 
 extern Lmediumgameplay gmediumgameplayButtons[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 

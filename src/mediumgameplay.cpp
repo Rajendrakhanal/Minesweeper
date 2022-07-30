@@ -5,20 +5,21 @@
 // Gameplay variables
 int medium_countMineLeft = MEDIUM_MINE_COUNT;
 int medium_countTileLeft = MEDIUM_ROW_SIZE * MEDIUM_COLUMN_SIZE;
-bool gameOver = false;
-bool isWinning = false;
 // Board with mine
-int board[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
+int mediumboard[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 
 // Board for showing
-int sBoard[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
+int smediumBoard[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 
 Lmediumgameplay gmediumgameplayButtons[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 Lmediumgameplay gmediumloadscreen;
 
 Mix_Chunk *click = NULL;
 
-SDL_Rect gmediumSpriteClips[BUTTON_SPRITE_TOTAL];
+bool gameOver=false ;
+bool isWinning=false;
+
+SDL_Rect gmediumSpriteClips[MEDIUM_BUTTON_SPRITE_TOTAL];
 
 Lmediumgameplay::Lmediumgameplay()
 {
@@ -47,7 +48,7 @@ void Lmediumgameplay::mediumloadmedia()
     else
     {
         // Set sprites
-        for (int i = 0; i < BUTTON_SPRITE_TOTAL; i++)
+        for (int i = 0; i < MEDIUM_BUTTON_SPRITE_TOTAL; i++)
         {
             gmediumSpriteClips[i].x = i * 32;
             gmediumSpriteClips[i].y = 0;
@@ -68,37 +69,37 @@ void Lmediumgameplay::mediumloadmedia()
 void Lmediumgameplay::render(int i, int j)
 {
     // Show current button sprite
-    gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gmediumSpriteClips[sBoard[i][j]]);
+    gButtonSpriteSheetTexture.render(mPosition.x, mPosition.y, &gmediumSpriteClips[smediumBoard[i][j]]);
 }
 
-void reveal(int i, int j)
+void mreveal(int i, int j)
 {
-    if (sBoard[i][j] == 10 || sBoard[i][j] == 11)
+    if (smediumBoard[i][j] == 10 || smediumBoard[i][j] == 11)
     {
-        if (sBoard[i][j] == 11)
+        if (smediumBoard[i][j] == 11)
         {
             medium_countMineLeft++;
         }
-        sBoard[i][j] = board[i][j];
+        smediumBoard[i][j] = mediumboard[i][j];
         medium_countTileLeft--;
-        if (sBoard[i][j] == 0)
+        if (smediumBoard[i][j] == 0)
         {
             if (i < MEDIUM_ROW_SIZE - 1)
-                reveal(i + 1, j);
+                mreveal(i + 1, j);
             if (i > 0)
-                reveal(i - 1, j);
+                mreveal(i - 1, j);
             if (j < MEDIUM_COLUMN_SIZE - 1)
-                reveal(i, j + 1);
+                mreveal(i, j + 1);
             if (j > 0)
-                reveal(i, j - 1);
+                mreveal(i, j - 1);
             if (i > 0 && j > 0)
-                reveal(i - 1, j - 1);
+                mreveal(i - 1, j - 1);
             if (i < MEDIUM_ROW_SIZE - 1 && j < MEDIUM_COLUMN_SIZE - 1)
-                reveal(i + 1, j + 1);
+                mreveal(i + 1, j + 1);
             if (i > 0 && j < MEDIUM_COLUMN_SIZE - 1)
-                reveal(i - 1, j + 1);
+                mreveal(i - 1, j + 1);
             if (i < MEDIUM_ROW_SIZE - 1 && j > 0)
-                reveal(i + 1, j - 1);
+                mreveal(i + 1, j - 1);
         }
     }
 }
@@ -152,8 +153,8 @@ void Lmediumgameplay::handleEvent(SDL_Event *e)
                 {
                 case SDL_BUTTON_LEFT:
                 {
-                    reveal(i, j);
-                    if (board[i][j] == 9)
+                    mreveal(i, j);
+                    if (mediumboard[i][j] == 9)
                     {
                         gameOver = true;
                     }
@@ -161,18 +162,18 @@ void Lmediumgameplay::handleEvent(SDL_Event *e)
                 }
                 case SDL_BUTTON_RIGHT:
                 {
-                    if (sBoard[i][j] >= 10)
+                    if (smediumBoard[i][j] >= 10)
                     {
-                        if (sBoard[i][j] == 10)
+                        if (smediumBoard[i][j] == 10)
                         {
                             if (medium_countMineLeft == 0)
                                 break;
-                            sBoard[i][j] = 11;
+                            smediumBoard[i][j] = 11;
                             medium_countMineLeft--;
                         }
                         else
                         {
-                            sBoard[i][j] = 10;
+                            smediumBoard[i][j] = 10;
                             medium_countMineLeft++;
                         }
                     }

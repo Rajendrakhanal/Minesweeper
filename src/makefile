@@ -31,10 +31,10 @@ $(OBJ_DIRECTORY)/Texture.o : Texture.cpp
 $(OBJ_DIRECTORY)/window.o : window.cpp
 	$(CC) -c window.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/window.o
 
-$(OBJ_DIRECTORY)/difficultymenu.o : difficultymenu.cpp
+$(OBJ_DIRECTORY)/difficultymenu.o : difficultymenu.cpp 
 	$(CC) -c difficultymenu.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/difficultymenu.o
 
-$(OBJ_DIRECTORY)/easygameplay.o : easygameplay.cpp
+$(OBJ_DIRECTORY)/easygameplay.o : easygameplay.cpp 
 	$(CC) -c easygameplay.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/easygameplay.o
 
 $(OBJ_DIRECTORY)/mediumgameplay.o : mediumgameplay.cpp
@@ -43,3 +43,5 @@ $(OBJ_DIRECTORY)/mediumgameplay.o : mediumgameplay.cpp
 $(OBJ_DIRECTORY)/hardgameplay.o : hardgameplay.cpp
 	$(CC) -c hardgameplay.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/hardgameplay.o
 
+clean :
+	rm $(OBJ_DIRECTORY)/*.o

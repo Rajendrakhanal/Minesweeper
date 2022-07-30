@@ -1,5 +1,5 @@
 #OBJS specifies which files to compile as part of the project
-OBJS = $(OBJ_DIRECTORY)/main.o $(OBJ_DIRECTORY)/Texture.o $(OBJ_DIRECTORY)/window.o $(OBJ_DIRECTORY)/difficultymenu.o $(OBJ_DIRECTORY)/mediumgameplay.o $(OBJ_DIRECTORY)/hardgameplay.o
+OBJS = $(OBJ_DIRECTORY)/main.o $(OBJ_DIRECTORY)/Texture.o $(OBJ_DIRECTORY)/window.o $(OBJ_DIRECTORY)/difficultymenu.o $(OBJ_DIRECTORY)/mediumgameplay.o $(OBJ_DIRECTORY)/hardgameplay.o $(OBJ_DIRECTORY)/easygameplay.o
 
 #CC specifies which compiler we're using
 CC = g++

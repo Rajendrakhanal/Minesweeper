@@ -3,10 +3,10 @@
 #include "window.hpp"
 
 const int MEDIUM_BUTTON_SPRITE_TOTAL =12;
-const int MEDIUM_ROW_SIZE = 10;
-const int MEDIUM_COLUMN_SIZE = 10;
-const int MEDIUM_TILE_SIZE = 32;
-const int MEDIUM_MINE_COUNT = 12;
+const int MEDIUM_ROW_SIZE = 14;
+const int MEDIUM_COLUMN_SIZE = 14;
+const int MEDIUM_TILE_SIZE = 29;
+const int MEDIUM_MINE_COUNT = 14;
 
 extern bool gameOver ;
 extern bool isWinning;

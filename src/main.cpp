@@ -2,6 +2,7 @@
 #include "difficultymenu.hpp"
 #include "mediumgameplay.hpp"
 #include "hardgameplay.hpp"
+#include "easygameplay.hpp"
 
 // Loads media
 bool loadMedia();
@@ -22,6 +23,7 @@ bool loadMedia()
     }
     gmediumloadscreen.mediumloadmedia();
     ghardloadscreen.hardloadmedia();
+    geasyloadscreen.easyloadmedia();
 
     return success;
 }

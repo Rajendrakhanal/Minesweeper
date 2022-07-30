@@ -3,6 +3,7 @@
 #include "window.hpp"
 #include "mediumgameplay.hpp"
 #include "hardgameplay.hpp"
+#include "easygameplay.hpp"
 
 difficultymenu gdifficultymenu;
 
@@ -20,7 +21,51 @@ void difficultymenu::handleEvent(SDL_Event *e)
     // To render easy gameplay
     if (x > 51 && x < 150 && y > 159 && y < 273)
     {
-      cout << "EASY";
+      {
+        // Main loop flag
+        bool quit = false;
+
+        // Event handler
+        SDL_Event e;
+
+        // While application is running
+        while (!quit)
+        {
+          // Handle events on queue
+          while (SDL_PollEvent(&e) != 0)
+          {
+            // User requests quit
+            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+            {
+              quit = true;
+            }
+            for (int i = 0; i < EASY_ROW_SIZE; i++)
+            {
+              for (int j = 0; j < EASY_COLUMN_SIZE; j++)
+              {
+                geasygameplayButtons[i][j].handleEvent(&e);
+              }
+            }
+          }
+
+          // clear screen
+          SDL_RenderClear(gRenderer);
+
+          // Render background
+          gBackgroundTexture.render(0, 0);
+
+          // Render buttons
+          for (int i = 0; i < EASY_ROW_SIZE; i++)
+          {
+            for (int j = 0; j < EASY_COLUMN_SIZE; j++)
+            {
+              geasygameplayButtons[i][j].render(i, j);
+            }
+          }
+          // update screen
+          SDL_RenderPresent(gRenderer);
+        }
+      }
     }
 
     // To Render medium gameplay
@@ -67,8 +112,6 @@ void difficultymenu::handleEvent(SDL_Event *e)
           }
           // update screen
           SDL_RenderPresent(gRenderer);
-
-          // Render backgroun
         }
       }
     }
@@ -117,11 +160,8 @@ void difficultymenu::handleEvent(SDL_Event *e)
           }
           // update screen
           SDL_RenderPresent(gRenderer);
-
-      
         }
       }
     }
   }
 }
-

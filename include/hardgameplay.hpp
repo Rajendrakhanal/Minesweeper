@@ -2,10 +2,10 @@
 #include "window.hpp"
 
 const int HARD_BUTTON_SPRITE_TOTAL =12;
-const int HARD_ROW_SIZE = 14;
-const int HARD_COLUMN_SIZE = 14;
-const int HARD_TILE_SIZE = 28;
-const int HARD_MINE_COUNT = 18;
+const int HARD_ROW_SIZE = 16;
+const int HARD_COLUMN_SIZE = 16;
+const int HARD_TILE_SIZE = 26;
+const int HARD_MINE_COUNT = 20;
 const int HARD_DISTANCE_BETWEEN = (SCREEN_WIDTH - HARD_ROW_SIZE * HARD_TILE_SIZE) / 2;
 
 extern bool hardgameOver ;

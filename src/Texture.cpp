@@ -1,7 +1,25 @@
 #include "Texture.hpp"
 #include "window.hpp"
+#include "mediumgameplay.hpp"
 
-TTF_Font *gGameOver = NULL;
+// Globally used font
+TTF_Font *gPlayAgainWin = NULL;
+TTF_Font *gPlayAgainLose = NULL;
+TTF_Font *gGameOver=NULL;
+
+
+LTexture gdifficultymenuTexture;
+LTexture gButtonSpriteSheetTexture;
+
+//Rendered texture
+LTexture gTextTexture;
+LTexture gMineLeftTexture;
+LTexture gPlayAgainWinTexture;
+LTexture gPlayAgainLoseTexture;
+
+// screen Texture
+LTexture gBackgroundTexture;
+LTexture gWinningTexture;
 
 LTexture::LTexture()
 {
@@ -126,7 +144,3 @@ int LTexture::getHeight()
 {
 	return mHeight;
 }
-
-LTexture gdifficultymenuTexture;
-LTexture gButtonSpriteSheetTexture;
-LTexture gBackgroundTexture;

@@ -21,6 +21,69 @@ bool loadMedia()
         printf("Failed to load texture image!\n");
         success = false;
     }
+    if (!gBackgroundTexture.loadFromFile("../bin/Image/Background.png"))
+    {
+        cout << "Failed to load background texture!\n";
+        success = false;
+    }
+    // Open the font
+    gGameOver = TTF_OpenFont("DTM-Sans.ttf", 23);
+    if (gGameOver == NULL)
+    {
+        cout << "Failed to load DTM-Sans font! SDL_ttf Error: " << TTF_GetError() << endl;
+        success = false;
+    }
+    else
+    {
+        // Render text
+        SDL_Color textColor = {140, 140, 140};
+        if (!gTextTexture.loadFromRenderedText("GAME OVER :(", textColor))
+        {
+            cout << "Failed to render text texture!\n";
+            success = false;
+        }
+    }
+
+    gPlayAgainWin = TTF_OpenFont("DTM-Sans.ttf", 40);
+    if (gPlayAgainWin == NULL)
+    {
+        cout << "Failed to load DTM-Sans font! SDL_ttf Error: " << TTF_GetError() << endl;
+        success = false;
+    }
+    else
+    {
+        // Render text
+        SDL_Color playAgainWin = {30, 100, 100};
+        if (!gPlayAgainWinTexture.loadFromRenderedText("Press s to play again!", playAgainWin))
+        {
+            cout << "Failed to render text texture!\n";
+            success = false;
+        }
+    }
+
+    gPlayAgainLose = TTF_OpenFont("DTM-Sans.ttf", 40);
+    if (gPlayAgainLose == NULL)
+    {
+        cout << "Failed to load DTM-Sans font! SDL_ttf Error: " << TTF_GetError() << endl;
+        success = false;
+    }
+    else
+    {
+        // Render text
+        SDL_Color playAgainLose = {140, 140, 140};
+        if (!gPlayAgainLoseTexture.loadFromRenderedText("Press s to play again!", playAgainLose))
+        {
+            cout << "Failed to render text texture!\n";
+            success = false;
+        }
+    }
+
+    // Load scene
+    if (!gWinningTexture.loadFromFile("../bin/Image/Winner.png"))
+    {
+        cout << "Failed to load winning texture!\n";
+        success = false;
+    }
     gmediumloadscreen.mediumloadmedia();
     ghardloadscreen.hardloadmedia();
     geasyloadscreen.easyloadmedia();

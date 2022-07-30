@@ -7,6 +7,8 @@
 using namespace std;
 
 extern TTF_Font *gGameOver;
+extern TTF_Font *gPlayAgainWin;
+extern TTF_Font *gPlayAgainLose;
 
 // Texture wrapper class
 class LTexture
@@ -43,6 +45,17 @@ private:
     int mHeight;
 };
 
+
 extern LTexture gdifficultymenuTexture;
+
 extern LTexture gButtonSpriteSheetTexture;
+
+//Screen Texture
 extern LTexture gBackgroundTexture;
+extern LTexture gWinningTexture;
+
+//Rendered texture
+extern LTexture gTextTexture;
+extern LTexture gMineLeftTexture;
+extern LTexture gPlayAgainWinTexture;
+extern LTexture gPlayAgainLoseTexture;

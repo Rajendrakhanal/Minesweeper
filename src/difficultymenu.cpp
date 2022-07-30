@@ -15,56 +15,50 @@ void difficultymenu::handleEvent(SDL_Event *e)
     int x, y;
     SDL_GetMouseState(&x, &y);
 
-    // Check if mouse is in button
-    bool inside = true;
-
     // To render easy gameplay
     if (x > 51 && x < 150 && y > 159 && y < 273)
     {
+      bool quit = false;
+      // Event handler
+      SDL_Event e;
+      // While application is running
+      while (!quit)
       {
-        // Main loop flag
-        bool quit = false;
-
-        // Event handler
-        SDL_Event e;
-
-        // While application is running
-        while (!quit)
+        // Handle events on queue
+        while (SDL_PollEvent(&e) != 0)
         {
-          // Handle events on queue
-          while (SDL_PollEvent(&e) != 0)
+          // User requests quit
+          if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
           {
-            // User requests quit
-            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
-            {
-              quit = true;
-            }
-            for (int i = 0; i < EASY_ROW_SIZE; i++)
-            {
-              for (int j = 0; j < EASY_COLUMN_SIZE; j++)
-              {
-                geasygameplayButtons[i][j].handleEvent(&e);
-              }
-            }
+            quit = true;
           }
-
-          // clear screen
-          SDL_RenderClear(gRenderer);
-
-          // Render background
-          gBackgroundTexture.render(0, 0);
-
-          // Render buttons
           for (int i = 0; i < EASY_ROW_SIZE; i++)
           {
             for (int j = 0; j < EASY_COLUMN_SIZE; j++)
             {
-              geasygameplayButtons[i][j].render(i, j);
+              geasygameplayButtons[i][j].handleEvent(&e);
             }
           }
-          // update screen
-          SDL_RenderPresent(gRenderer);
         }
+        // clear screen
+        SDL_RenderClear(gRenderer);
+
+        // Render background
+        gBackgroundTexture.render(0, 0);
+        // Render Text
+        gPlayAgainLoseTexture.render(110, 415);
+
+        // Render buttons
+        for (int i = 0; i < EASY_ROW_SIZE; i++)
+        {
+          for (int j = 0; j < EASY_COLUMN_SIZE; j++)
+          {
+            geasygameplayButtons[i][j].render(i, j);
+          }
+        }
+
+        // update screen
+        SDL_RenderPresent(gRenderer);
       }
     }
 
@@ -102,6 +96,8 @@ void difficultymenu::handleEvent(SDL_Event *e)
           SDL_RenderClear(gRenderer);
           // Render background
           gBackgroundTexture.render(0, 0);
+          // Render Text
+          gPlayAgainLoseTexture.render(100, 430);
           // Render buttons
           for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
           {
@@ -150,6 +146,8 @@ void difficultymenu::handleEvent(SDL_Event *e)
           SDL_RenderClear(gRenderer);
           // Render background
           gBackgroundTexture.render(0, 0);
+          // Render Text
+          gPlayAgainLoseTexture.render(100, 432);
           // Render buttons
           for (int i = 0; i < HARD_ROW_SIZE; i++)
           {

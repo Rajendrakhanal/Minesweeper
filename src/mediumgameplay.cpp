@@ -14,10 +14,11 @@ int smediumBoard[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 Lmediumgameplay gmediumgameplayButtons[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 Lmediumgameplay gmediumloadscreen;
 
+
 Mix_Chunk *click = NULL;
 
-bool gameOver=false ;
-bool isWinning=false;
+bool mediumgameOver = false;
+bool mediumisWinning = false;
 
 SDL_Rect gmediumSpriteClips[MEDIUM_BUTTON_SPRITE_TOTAL];
 
@@ -33,16 +34,10 @@ void Lmediumgameplay::setPosition(int x, int y)
 }
 void Lmediumgameplay::mediumloadmedia()
 {
-    bool success = true;
-    // Load sprites
+    bool success = true;    // Load sprites
     if (!gButtonSpriteSheetTexture.loadFromFile("../bin/Image/Tiles.png"))
     {
         cout << "Failed to load sprites texture!\n";
-        success = false;
-    }
-    if (!gBackgroundTexture.loadFromFile("../bin/Image/Background.png"))
-    {
-        cout << "Failed to load background texture!\n";
         success = false;
     }
     else
@@ -156,7 +151,7 @@ void Lmediumgameplay::handleEvent(SDL_Event *e)
                     mreveal(i, j);
                     if (mediumboard[i][j] == 9)
                     {
-                        gameOver = true;
+                        mediumgameOver = true;
                     }
                     break;
                 }

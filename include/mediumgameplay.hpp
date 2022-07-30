@@ -39,3 +39,6 @@ extern SDL_Rect gmediumSpriteClips[MEDIUM_BUTTON_SPRITE_TOTAL];
 extern Lmediumgameplay gmediumgameplayButtons[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 
 extern Lmediumgameplay gmediumloadscreen;
+
+
+

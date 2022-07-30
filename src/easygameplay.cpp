@@ -40,11 +40,6 @@ void Leasygameplay::easyloadmedia()
         cout << "Failed to load sprites texture!\n";
         success = false;
     }
-    if (!gBackgroundTexture.loadFromFile("../bin/Image/Background.png"))
-    {
-        cout << "Failed to load background texture!\n";
-        success = false;
-    }
     else
     {
         // Set sprites

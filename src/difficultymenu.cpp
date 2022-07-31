@@ -19,6 +19,8 @@ void difficultymenu::handleEvent(SDL_Event *e)
     if (x > 51 && x < 150 && y > 159 && y < 273)
     {
       bool quit = false;
+      // Render easytablewithmines
+      geasyloadscreen.easyCreateTableWithMine();
       // Event handler
       SDL_Event e;
       // While application is running
@@ -71,10 +73,10 @@ void difficultymenu::handleEvent(SDL_Event *e)
 
         // Event handler
         SDL_Event e;
-
         // While application is running
         while (!quit)
         {
+
           // Handle events on queue
           while (SDL_PollEvent(&e) != 0)
           {
@@ -91,7 +93,6 @@ void difficultymenu::handleEvent(SDL_Event *e)
               }
             }
           }
-
           // clear screen
           SDL_RenderClear(gRenderer);
           // Render background

@@ -96,11 +96,20 @@ void close()
     // Destroy window
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
+
+    // Free loaded images
+    gButtonSpriteSheetTexture.free();
+    gMineLeftTexture.free();
+    gBackgroundTexture.free();
+    gWinningTexture.free();
+    gTextTexture.free();
+
     gWindow = NULL;
     gRenderer = NULL;
 
     // Quit SDL subsystems
     IMG_Quit();
+    Mix_Quit();
     SDL_Quit();
 }
 

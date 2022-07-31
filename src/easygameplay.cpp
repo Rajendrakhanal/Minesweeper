@@ -5,6 +5,7 @@
 // Gameplay variables
 int easy_countMineLeft = EASY_MINE_COUNT;
 int easy_countTileLeft = EASY_ROW_SIZE * EASY_COLUMN_SIZE;
+
 // Board with mine
 int easyboard[EASY_ROW_SIZE][EASY_COLUMN_SIZE];
 
@@ -16,8 +17,8 @@ Leasygameplay geasyloadscreen;
 
 Mix_Chunk *eclick = NULL;
 
-bool easygameOver=false ;
-bool easyisWinning=false;
+bool easygameOver = false;
+bool easyisWinning = false;
 
 SDL_Rect geasySpriteClips[EASY_BUTTON_SPRITE_TOTAL];
 
@@ -50,7 +51,7 @@ void Leasygameplay::easyloadmedia()
             geasySpriteClips[i].w = EASY_TILE_SIZE;
             geasySpriteClips[i].h = EASY_TILE_SIZE;
         }
-        // Set buttons position
+        // Set position for buttons
         for (int i = 0; i < EASY_ROW_SIZE; i++)
         {
             for (int j = 0; j < EASY_COLUMN_SIZE; j++)
@@ -178,4 +179,48 @@ void Leasygameplay::handleEvent(SDL_Event *e)
             }
         }
     }
+}
+
+void Leasygameplay::easyCreateTableWithMine()
+{
+   // srand(time(NULL));
+    int mine = 0;
+    for (int i = 0; i < EASY_ROW_SIZE; i++)
+    {
+        for (int j = 0; j < EASY_COLUMN_SIZE; j++)
+        {
+            seasyBoard[i][j] = 10;
+            easyboard[i][j] = 0;
+        }
+    }
+    while (mine < EASY_MINE_COUNT)
+    {
+        int i = rand() % EASY_ROW_SIZE;
+        int j = rand() % EASY_COLUMN_SIZE;
+        if (easyboard[i][j] == 9)
+        {
+            continue;
+        }
+        else
+        {
+            easyboard[i][j] = 9;
+            mine++;
+            if (easyboard[i - 1][j] != 9 && i > 0)
+                easyboard[i - 1][j]++;
+            if (easyboard[i][j - 1] != 9 && j > 0)
+                easyboard[i][j - 1]++;
+            if (easyboard[i + 1][j] != 9 && i < EASY_ROW_SIZE - 1)
+                easyboard[i + 1][j]++;
+            if (easyboard[i][j + 1] != 9 && j < EASY_COLUMN_SIZE - 1)
+                easyboard[i][j + 1]++;
+            if (easyboard[i - 1][j - 1] != 9 && i > 0 && j > 0)
+                easyboard[i - 1][j - 1]++;
+            if (easyboard[i - 1][j + 1] != 9 && i > 0 && j < EASY_COLUMN_SIZE - 1)
+                easyboard[i - 1][j + 1]++;
+            if (easyboard[i + 1][j - 1] != 9 && j > 0 && i < EASY_ROW_SIZE - 1)
+                easyboard[i + 1][j - 1]++;
+            if (easyboard[i + 1][j + 1] != 9 && i < EASY_ROW_SIZE - 1 && j < EASY_COLUMN_SIZE - 1)
+                easyboard[i + 1][j + 1]++;
+        }
+   }
 }

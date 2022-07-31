@@ -26,6 +26,8 @@ public:
     // Sets top left position
     void setPosition(int x, int y);
 
+    void easyCreateTableWithMine();
+
     // Shows button sprite
     void render(int i, int j);
 

@@ -15,6 +15,10 @@ extern SDL_Window *gWindow;
 // The window renderer
 extern SDL_Renderer *gRenderer;
 
+//The sound effects that will be used
+extern Mix_Music *winner;
+extern Mix_Music *loser;
+
 using namespace std;
 
 bool init();

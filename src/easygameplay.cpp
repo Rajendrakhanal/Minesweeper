@@ -59,6 +59,12 @@ void Leasygameplay::easyloadmedia()
                 geasygameplayButtons[i][j].setPosition(j * EASY_TILE_SIZE + EASY_DISTANCE_BETWEEN, i * EASY_TILE_SIZE + EASY_DISTANCE_BETWEEN);
             }
         }
+        eclick = Mix_LoadWAV("../bin/Sounds/click.wav");
+        if (eclick == NULL)
+        {
+            cout << "Failed to load click sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
+            success = false;
+        }
     }
 }
 
@@ -102,7 +108,7 @@ void ereveal(int i, int j)
 
 void Leasygameplay::handleEvent(SDL_Event *e)
 {
-    // If mouse event happened
+    // If mouse event happeneddependencies
     if (e->type == SDL_MOUSEMOTION || e->type == SDL_MOUSEBUTTONDOWN || e->type == SDL_MOUSEBUTTONUP)
     {
         // Get mouse position
@@ -183,7 +189,7 @@ void Leasygameplay::handleEvent(SDL_Event *e)
 
 void Leasygameplay::easyCreateTableWithMine()
 {
-   // srand(time(NULL));
+    // srand(time(NULL));
     int mine = 0;
     for (int i = 0; i < EASY_ROW_SIZE; i++)
     {
@@ -222,5 +228,5 @@ void Leasygameplay::easyCreateTableWithMine()
             if (easyboard[i + 1][j + 1] != 9 && i < EASY_ROW_SIZE - 1 && j < EASY_COLUMN_SIZE - 1)
                 easyboard[i + 1][j + 1]++;
         }
-   }
+    }
 }

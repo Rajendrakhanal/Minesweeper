@@ -6,6 +6,10 @@ SDL_Window *gWindow = NULL;
 // The window renderer
 SDL_Renderer *gRenderer = NULL;
 
+//The sound effects that will be used
+Mix_Music *winner = NULL;
+Mix_Music *loser = NULL;
+
 bool init()
 {
     // Initialization flag

@@ -7,6 +7,7 @@
 // Loads media
 bool loadMedia();
 
+
 // Frees media and shuts down SDL
 void close();
 
@@ -88,6 +89,20 @@ bool loadMedia()
     ghardloadscreen.hardloadmedia();
     geasyloadscreen.easyloadmedia();
 
+    //Load sound effects
+	winner = Mix_LoadMUS( "../bin/Sounds/winner.wav" );
+	if( winner == NULL )
+	{
+		cout << "Failed to load winner sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
+		success = false;
+	}
+
+	loser = Mix_LoadMUS( "../bin/Sounds/loser.wav" );
+	if( loser == NULL )
+	{
+		cout << "Failed to load loser sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
+		success = false;
+	}
     return success;
 }
 

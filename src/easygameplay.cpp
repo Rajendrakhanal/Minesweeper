@@ -141,7 +141,6 @@ void Leasygameplay::handleEvent(SDL_Event *e)
         {
             inside = false;
         }
-
         // Mouse is inside button
         if (inside)
         {

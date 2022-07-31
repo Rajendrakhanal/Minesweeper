@@ -8,6 +8,10 @@ const int EASY_COLUMN_SIZE = 11;
 const int EASY_TILE_SIZE = 32;
 const int EASY_MINE_COUNT = 11;
 
+// Gameplay variables
+extern int easy_countMineLeft ;
+extern int easy_countTileLeft ;
+
 extern bool easygameOver ;
 extern bool easyisWinning;
 

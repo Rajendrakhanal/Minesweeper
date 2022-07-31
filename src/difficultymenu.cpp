@@ -9,6 +9,7 @@ difficultymenu gdifficultymenu;
 
 void difficultymenu::handleEvent(SDL_Event *e)
 {
+  // If mouse event happeneddependencies
   if (e->type == SDL_MOUSEBUTTONDOWN)
   {
     // Get mouse position
@@ -40,6 +41,10 @@ void difficultymenu::handleEvent(SDL_Event *e)
             {
               geasygameplayButtons[i][j].handleEvent(&e);
             }
+          }
+          if (e.key.keysym.sym == SDLK_s)
+          {
+            geasyloadscreen.easyCreateTableWithMine();
           }
         }
         // clear screen

@@ -6,7 +6,7 @@ const int MEDIUM_BUTTON_SPRITE_TOTAL =12;
 const int MEDIUM_ROW_SIZE = 14;
 const int MEDIUM_COLUMN_SIZE = 14;
 const int MEDIUM_TILE_SIZE = 29;
-const int MEDIUM_MINE_COUNT = 14;
+const int MEDIUM_MINE_COUNT = 15;
 
 extern bool gameOver ;
 extern bool isWinning;
@@ -25,6 +25,8 @@ public:
 
     // Sets top left position
     void setPosition(int x, int y);
+
+    void mediumCreateTableWithMine();
 
     // Shows button sprite
     void render(int i, int j);

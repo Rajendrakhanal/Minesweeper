@@ -7,7 +7,6 @@
 // Loads media
 bool loadMedia();
 
-
 // Frees media and shuts down SDL
 void close();
 
@@ -89,20 +88,26 @@ bool loadMedia()
     ghardloadscreen.hardloadmedia();
     geasyloadscreen.easyloadmedia();
 
-    //Load sound effects
-	winner = Mix_LoadMUS( "../bin/Sounds/winner.wav" );
-	if( winner == NULL )
-	{
-		cout << "Failed to load winner sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
-		success = false;
-	}
+    // Load sound effects
+    winner = Mix_LoadMUS("../bin/Sounds/winner.wav");
+    if (winner == NULL)
+    {
+        cout << "Failed to load winner sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
+        success = false;
+    }
 
-	loser = Mix_LoadMUS( "../bin/Sounds/loser.wav" );
-	if( loser == NULL )
-	{
-		cout << "Failed to load loser sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
-		success = false;
-	}
+    loser = Mix_LoadMUS("../bin/Sounds/loser.wav");
+    if (loser == NULL)
+    {
+        cout << "Failed to load loser sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
+        success = false;
+    }
+    click = Mix_LoadWAV("../bin/Sounds/click.wav");
+    if (click == NULL)
+    {
+        cout << "Failed to load click sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
+        success = false;
+    }
     return success;
 }
 
@@ -111,6 +116,11 @@ void close()
     // Destroy window
     SDL_DestroyRenderer(gRenderer);
     SDL_DestroyWindow(gWindow);
+
+    // Free global font
+    TTF_CloseFont(gGameOver);
+    TTF_CloseFont(gPlayAgainLose);
+    TTF_CloseFont(gPlayAgainWin);
 
     // Free loaded images
     gButtonSpriteSheetTexture.free();
@@ -121,6 +131,11 @@ void close()
 
     gWindow = NULL;
     gRenderer = NULL;
+
+    // Free the sound effects
+    Mix_FreeMusic(winner);
+    Mix_FreeMusic(loser);
+    Mix_FreeChunk(click);
 
     // Quit SDL subsystems
     IMG_Quit();

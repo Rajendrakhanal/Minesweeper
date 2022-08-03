@@ -15,8 +15,6 @@ int seasyBoard[EASY_ROW_SIZE][EASY_COLUMN_SIZE];
 Leasygameplay geasygameplayButtons[EASY_ROW_SIZE][EASY_COLUMN_SIZE];
 Leasygameplay geasyloadscreen;
 
-Mix_Chunk *eclick = NULL;
-
 bool easygameOver = false;
 bool easyisWinning = false;
 
@@ -58,12 +56,6 @@ void Leasygameplay::easyloadmedia()
             {
                 geasygameplayButtons[i][j].setPosition(j * EASY_TILE_SIZE + EASY_DISTANCE_BETWEEN, i * EASY_TILE_SIZE + EASY_DISTANCE_BETWEEN);
             }
-        }
-        eclick = Mix_LoadWAV("../bin/Sounds/click.wav");
-        if (eclick == NULL)
-        {
-            cout << "Failed to load click sound effect! SDL_mixer Error: " << Mix_GetError() << endl;
-            success = false;
         }
     }
 }
@@ -147,7 +139,7 @@ void Leasygameplay::handleEvent(SDL_Event *e)
             if (e->type == SDL_MOUSEBUTTONDOWN)
             {
                 // Play the sound effect
-                Mix_PlayChannel(-1, eclick, 0);
+                Mix_PlayChannel(-1, click, 0);
 
                 // Set mouse clicked
                 switch (e->button.button)
@@ -188,7 +180,7 @@ void Leasygameplay::handleEvent(SDL_Event *e)
 
 void Leasygameplay::easyCreateTableWithMine()
 {
-    // srand(time(NULL));
+     srand(time(NULL));
     int mine = 0;
     for (int i = 0; i < EASY_ROW_SIZE; i++)
     {

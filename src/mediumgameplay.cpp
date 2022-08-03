@@ -14,9 +14,6 @@ int smediumBoard[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 Lmediumgameplay gmediumgameplayButtons[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 Lmediumgameplay gmediumloadscreen;
 
-
-Mix_Chunk *click = NULL;
-
 bool mediumgameOver = false;
 bool mediumisWinning = false;
 
@@ -59,6 +56,7 @@ void Lmediumgameplay::mediumloadmedia()
             }
         }
     }
+    
 }
 
 void Lmediumgameplay::render(int i, int j)
@@ -176,6 +174,50 @@ void Lmediumgameplay::handleEvent(SDL_Event *e)
                 }
                 }
             }
+        }
+    }
+}
+
+void Lmediumgameplay::mediumCreateTableWithMine()
+{
+     srand(time(NULL));
+    int mine = 0;
+    for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
+    {
+        for (int j = 0; j < MEDIUM_COLUMN_SIZE; j++)
+        {
+            smediumBoard[i][j] = 10;
+            mediumboard[i][j] = 0;
+        }
+    }
+    while (mine < MEDIUM_MINE_COUNT)
+    {
+        int i = rand() % MEDIUM_ROW_SIZE;
+        int j = rand() % MEDIUM_COLUMN_SIZE;
+        if (mediumboard[i][j] == 9)
+        {
+            continue;
+        }
+        else
+        {
+            mediumboard[i][j] = 9;
+            mine++;
+            if (mediumboard[i - 1][j] != 9 && i > 0)
+                mediumboard[i - 1][j]++;
+            if (mediumboard[i][j - 1] != 9 && j > 0)
+                mediumboard[i][j - 1]++;
+            if (mediumboard[i + 1][j] != 9 && i < MEDIUM_ROW_SIZE - 1)
+                mediumboard[i + 1][j]++;
+            if (mediumboard[i][j + 1] != 9 && j < MEDIUM_COLUMN_SIZE - 1)
+                mediumboard[i][j + 1]++;
+            if (mediumboard[i - 1][j - 1] != 9 && i > 0 && j > 0)
+                mediumboard[i - 1][j - 1]++;
+            if (mediumboard[i - 1][j + 1] != 9 && i > 0 && j < MEDIUM_COLUMN_SIZE - 1)
+                mediumboard[i - 1][j + 1]++;
+            if (mediumboard[i + 1][j - 1] != 9 && j > 0 && i < MEDIUM_ROW_SIZE - 1)
+                mediumboard[i + 1][j - 1]++;
+            if (mediumboard[i + 1][j + 1] != 9 && i < MEDIUM_ROW_SIZE - 1 && j < MEDIUM_COLUMN_SIZE - 1)
+                mediumboard[i + 1][j + 1]++;
         }
     }
 }

@@ -9,6 +9,7 @@ SDL_Renderer *gRenderer = NULL;
 //The sound effects that will be used
 Mix_Music *winner = NULL;
 Mix_Music *loser = NULL;
+Mix_Chunk *click = NULL;
 
 bool init()
 {

@@ -27,6 +27,8 @@ public:
     // Shows button sprite
     void render(int i, int j);
 
+    void hardCreateTableWithMine();
+
 private:
     // Top left position
     SDL_Point mPosition;

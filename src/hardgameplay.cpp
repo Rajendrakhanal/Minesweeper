@@ -13,8 +13,6 @@ int shardBoard[HARD_ROW_SIZE][HARD_COLUMN_SIZE];
 Lhardgameplay ghardgameplayButtons[HARD_ROW_SIZE][HARD_COLUMN_SIZE];
 Lhardgameplay ghardloadscreen;
 
-Mix_Chunk *hclick = NULL;
-
 bool hardgameOver = false;
 bool hardisWinning = false;
 
@@ -140,9 +138,9 @@ void Lhardgameplay::handleEvent(SDL_Event *e)
             if (e->type == SDL_MOUSEBUTTONDOWN)
             {
                 // Play the sound effect
-                Mix_PlayChannel(-1, hclick, 0);
+                Mix_PlayChannel(-1, click, 0);
 
-                // Set mouse hclicked
+                // Set mouse clicked
                 switch (e->button.button)
                 {
                 case SDL_BUTTON_LEFT:
@@ -175,6 +173,50 @@ void Lhardgameplay::handleEvent(SDL_Event *e)
                 }
                 }
             }
+        }
+    }
+}
+
+void Lhardgameplay::hardCreateTableWithMine()
+{
+     srand(time(NULL));
+    int mine = 0;
+    for (int i = 0; i < HARD_ROW_SIZE; i++)
+    {
+        for (int j = 0; j < HARD_COLUMN_SIZE; j++)
+        {
+            shardBoard[i][j] = 10;
+            hardboard[i][j] = 0;
+        }
+    }
+    while (mine < HARD_MINE_COUNT)
+    {
+        int i = rand() % HARD_ROW_SIZE;
+        int j = rand() % HARD_COLUMN_SIZE;
+        if (hardboard[i][j] == 9)
+        {
+            continue;
+        }
+        else
+        {
+            hardboard[i][j] = 9;
+            mine++;
+            if (hardboard[i - 1][j] != 9 && i > 0)
+                hardboard[i - 1][j]++;
+            if (hardboard[i][j - 1] != 9 && j > 0)
+                hardboard[i][j - 1]++;
+            if (hardboard[i + 1][j] != 9 && i < HARD_ROW_SIZE - 1)
+                hardboard[i + 1][j]++;
+            if (hardboard[i][j + 1] != 9 && j < HARD_COLUMN_SIZE - 1)
+                hardboard[i][j + 1]++;
+            if (hardboard[i - 1][j - 1] != 9 && i > 0 && j > 0)
+                hardboard[i - 1][j - 1]++;
+            if (hardboard[i - 1][j + 1] != 9 && i > 0 && j < HARD_COLUMN_SIZE - 1)
+                hardboard[i - 1][j + 1]++;
+            if (hardboard[i + 1][j - 1] != 9 && j > 0 && i < HARD_ROW_SIZE - 1)
+                hardboard[i + 1][j - 1]++;
+            if (hardboard[i + 1][j + 1] != 9 && i < HARD_ROW_SIZE - 1 && j < HARD_COLUMN_SIZE - 1)
+                hardboard[i + 1][j + 1]++;
         }
     }
 }

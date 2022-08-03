@@ -18,7 +18,7 @@ extern SDL_Renderer *gRenderer;
 //The sound effects that will be used
 extern Mix_Music *winner;
 extern Mix_Music *loser;
-
+extern Mix_Chunk *click;
 using namespace std;
 
 bool init();

@@ -25,6 +25,7 @@ void difficultymenu::handleEvent(SDL_Event *e)
       {
         // Render easytablewithmines
         geasyloadscreen.easyCreateTableWithMine();
+        
         // While game is not over yet
         // Event handler
         SDL_Event e;

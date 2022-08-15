@@ -35,6 +35,9 @@ public:
     // Shows button sprite
     void render(int i, int j);
 
+    //quitegame
+    bool easygameover();
+
 private:
     // Top left position
     SDL_Point mPosition;

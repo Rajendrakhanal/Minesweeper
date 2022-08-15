@@ -34,7 +34,7 @@ void Leasygameplay::easyloadmedia()
 {
     bool success = true;
     // Load sprites
-    if (!gButtonSpriteSheetTexture.loadFromFile("../bin/Image/Tiles.png"))
+    if (!gButtonSpriteSheetTexture.loadFromFile("bin/Image/Tiles.png"))
     {
         cout << "Failed to load sprites texture!\n";
         success = false;
@@ -221,3 +221,4 @@ void Leasygameplay::easyCreateTableWithMine()
         }
     }
 }
+

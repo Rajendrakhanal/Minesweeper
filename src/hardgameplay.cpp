@@ -264,7 +264,7 @@ void Lhardgameplay::flagmanager()
         gPlayAgainLoseTexture.render((SCREEN_WIDTH - gPlayAgainLoseTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainLoseTexture.getHeight());
         // update screen
         SDL_RenderPresent(gRenderer);
-        SDL_Delay(3000);
+        SDL_Delay(2000);
     }
 }
 

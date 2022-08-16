@@ -25,48 +25,55 @@ void difficultymenu::handleEvent(SDL_Event *e)
       // Event handler
       SDL_Event e;
       // While application is running
-      while (!quit && !easygameOver && !easyisWinning)
+      while (!quit)
       {
-        // Handle events on queue
-        while (SDL_PollEvent(&e) != 0)
+        while (!quit && !easygameOver && !easyisWinning)
         {
-          // User requests quit
-          if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+          // Handle events on queue
+          while (SDL_PollEvent(&e) != 0)
           {
-            quit = true;
+            // User requests quit
+            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+            {
+              quit = true;
+            }
+            for (int i = 0; i < EASY_ROW_SIZE; i++)
+            {
+              for (int j = 0; j < EASY_COLUMN_SIZE; j++)
+              {
+                geasygameplayButtons[i][j].handleEvent(&e);
+              }
+            }
+            easyisWinning = geasyloadscreen.checkWinning();
+            if (e.key.keysym.sym == SDLK_s)
+            {
+              geasyloadscreen.easyCreateTableWithMine();
+              easy_countMineLeft = EASY_MINE_COUNT;
+            }
           }
+          // clear screen
+          SDL_RenderClear(gRenderer);
+          // Render background
+          gBackgroundTexture.render(0, 0);
+          // Render Text
+          gPlayAgainLoseTexture.render(110, 415);
+          geasyloadscreen.easymineManager();
+          geasyloadscreen.flagmanager();
+          // Render buttons
           for (int i = 0; i < EASY_ROW_SIZE; i++)
           {
             for (int j = 0; j < EASY_COLUMN_SIZE; j++)
             {
-              geasygameplayButtons[i][j].handleEvent(&e);
+              geasygameplayButtons[i][j].render(i, j);
             }
           }
-          easyisWinning = geasyloadscreen.checkWinning();
-          if (e.key.keysym.sym == SDLK_s)
-          {
-            geasyloadscreen.easyCreateTableWithMine();
-          }
+          // update screen
+          SDL_RenderPresent(gRenderer);
         }
-        // clear screen
-        SDL_RenderClear(gRenderer);
-        // Render background
-        gBackgroundTexture.render(0, 0);
-        // Render Text
-        gPlayAgainLoseTexture.render(110, 415);
-        geasyloadscreen.easymineManager();
-        // Render buttons
-        for (int i = 0; i < EASY_ROW_SIZE; i++)
-        {
-          for (int j = 0; j < EASY_COLUMN_SIZE; j++)
-          {
-            geasygameplayButtons[i][j].render(i, j);
-          }
-        }
-        // update screen
-        SDL_RenderPresent(gRenderer);
+        easygameOver = false;
+        easyisWinning = false;
+        easy_countMineLeft = EASY_MINE_COUNT;
       }
-      geasyloadscreen.flagmanager();
     }
 
     // To Render medium gameplay

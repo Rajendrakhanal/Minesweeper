@@ -20,7 +20,7 @@ bool easyisWinning = false;
 
 SDL_Rect geasySpriteClips[EASY_BUTTON_SPRITE_TOTAL];
 
-//In memory text stream
+// In memory text stream
 stringstream easymineLeft;
 
 Leasygameplay::Leasygameplay()
@@ -37,7 +37,7 @@ void Leasygameplay::easyloadmedia()
 {
     bool success = true;
     // Load sprites
-    if (!gButtonSpriteSheetTexture.loadFromFile("bin/Image/Tiles.png"))
+    if (!gButtonSpriteSheetTexture.loadFromFile("resources/Image/Tiles.png"))
     {
         cout << "Failed to load sprites texture!\n";
         success = false;
@@ -227,28 +227,28 @@ void Leasygameplay::easyCreateTableWithMine()
 
 void Leasygameplay::flagmanager()
 {
-        //Check if win
-    if ( easyisWinning && !easygameOver )
+    // Check if win
+    if (easyisWinning && !easygameOver)
     {
-        //Update screen
-        SDL_RenderPresent( gRenderer );
+        // Update screen
+        SDL_RenderPresent(gRenderer);
 
-        //Delay loading screen
+        // Delay loading screen
         SDL_Delay(500);
 
-        //Play victory music
+        // Play victory music
         Mix_PlayMusic(winner, 0);
 
-        //Render winning scene
-        gWinningTexture.render( 0, 0 );
+        // Render winning scene
+        gWinningTexture.render(0, 0);
 
-        //Render playAgain
-        gPlayAgainWinTexture.render( ( SCREEN_WIDTH - gPlayAgainWinTexture.getWidth() ) / 2, SCREEN_HEIGHT - gPlayAgainWinTexture.getHeight() );
+        // Render playAgain
+        gPlayAgainWinTexture.render((SCREEN_WIDTH - gPlayAgainWinTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainWinTexture.getHeight());
     }
     if (easygameOver)
     {
-        // Render game over text
-        gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2, 0);
+        // Render background
+        gBackgroundTexture.render(0, 0);
         // Play losing music
         Mix_PlayMusic(loser, 0);
 
@@ -260,9 +260,13 @@ void Leasygameplay::flagmanager()
                 geasygameplayButtons[i][j].render(i, j);
             }
         }
-        SDL_Delay(800);
-        //Render play again
-        gPlayAgainLoseTexture.render( ( SCREEN_WIDTH - gPlayAgainLoseTexture.getWidth() ) / 2, SCREEN_HEIGHT - gPlayAgainLoseTexture.getHeight() );
+        // Render game over text
+        gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2, 0);
+        // Render play again
+        gPlayAgainLoseTexture.render((SCREEN_WIDTH - gPlayAgainLoseTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainLoseTexture.getHeight());
+        // update screen
+        SDL_RenderPresent(gRenderer);
+        SDL_Delay(3000);
     }
 }
 
@@ -277,21 +281,21 @@ bool Leasygameplay::checkWinning()
 }
 void Leasygameplay::easymineManager()
 {
-    //Render text
-    if ( !easygameOver && !easyisWinning )
+    // Render text
+    if (!easygameOver && !easyisWinning)
     {
-        //Set text color
-        SDL_Color textColor = { 140, 140, 140, 255 };
+        // Set text color
+        SDL_Color textColor = {140, 140, 140, 255};
 
-        //Erase the buffer
-        easymineLeft.str ( "" );
+        // Erase the buffer
+        easymineLeft.str("");
         easymineLeft << "Flag left: " << easy_countMineLeft;
-        if( !gMineLeftTexture.loadFromRenderedText( easymineLeft.str().c_str(), textColor ) )
+        if (!gMineLeftTexture.loadFromRenderedText(easymineLeft.str().c_str(), textColor))
         {
             cout << "Unable to render mine left texture!\n";
         }
 
-        //Render text
-        gMineLeftTexture.render( ( SCREEN_WIDTH - gMineLeftTexture.getWidth() ) / 2, 0 );
+        // Render text
+        gMineLeftTexture.render((SCREEN_WIDTH - gMineLeftTexture.getWidth()) / 2, 0);
     }
 }

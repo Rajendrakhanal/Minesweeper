@@ -32,7 +32,7 @@ void Lhardgameplay::hardloadmedia()
 {
     bool success = true;
     // Load sprites
-    if (!gButtonSpriteSheetTexture.loadFromFile("bin/Image/Tiles.png"))
+    if (!gButtonSpriteSheetTexture.loadFromFile("resources/Image/Tiles.png"))
     {
         cout << "Failed to load sprites texture!\n";
         success = false;

@@ -15,6 +15,9 @@ extern int easy_countTileLeft ;
 extern bool easygameOver ;
 extern bool easyisWinning;
 
+//In memory text stream
+extern stringstream easymineLeft;
+
 const int EASY_DISTANCE_BETWEEN = (SCREEN_WIDTH - EASY_ROW_SIZE * EASY_TILE_SIZE) / 2;
 
 class Leasygameplay
@@ -36,7 +39,11 @@ public:
     void render(int i, int j);
 
     //quitegame
-    bool easygameover();
+    void flagmanager();
+
+    bool checkWinning();
+
+    void easymineManager();
 
 private:
     // Top left position

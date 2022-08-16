@@ -88,42 +88,51 @@ void difficultymenu::handleEvent(SDL_Event *e)
       // While application is running
       while (!quit)
       {
-        // Handle events on queue
-        while (SDL_PollEvent(&e) != 0)
+        while (!quit && !mediumgameOver && !mediumisWinning)
         {
-          // User requests quit
-          if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+          // Handle events on queue
+          while (SDL_PollEvent(&e) != 0)
           {
-            quit = true;
+            // User requests quit
+            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+            {
+              quit = true;
+            }
+            for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
+            {
+              for (int j = 0; j < MEDIUM_COLUMN_SIZE; j++)
+              {
+                gmediumgameplayButtons[i][j].handleEvent(&e);
+              }
+            }
+            if (e.key.keysym.sym == SDLK_s)
+            {
+              gmediumloadscreen.mediumCreateTableWithMine();
+              medium_countMineLeft = MEDIUM_MINE_COUNT;
+            }
           }
+          // clear screen
+          SDL_RenderClear(gRenderer);
+          // Render background
+          gBackgroundTexture.render(0, 0);
+          gmediumloadscreen.mediummineManager();
+          gmediumloadscreen.flagmanager();
+          // Render Text
+          gPlayAgainLoseTexture.render(100, 430);
+          // Render buttons
           for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
           {
             for (int j = 0; j < MEDIUM_COLUMN_SIZE; j++)
             {
-              gmediumgameplayButtons[i][j].handleEvent(&e);
+              gmediumgameplayButtons[i][j].render(i, j);
             }
           }
-          if (e.key.keysym.sym == SDLK_s)
-          {
-            gmediumloadscreen.mediumCreateTableWithMine();
-          }
+          // update screen
+          SDL_RenderPresent(gRenderer);
         }
-        // clear screen
-        SDL_RenderClear(gRenderer);
-        // Render background
-        gBackgroundTexture.render(0, 0);
-        // Render Text
-        gPlayAgainLoseTexture.render(100, 430);
-        // Render buttons
-        for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
-        {
-          for (int j = 0; j < MEDIUM_COLUMN_SIZE; j++)
-          {
-            gmediumgameplayButtons[i][j].render(i, j);
-          }
-        }
-        // update screen
-        SDL_RenderPresent(gRenderer);
+        mediumgameOver = false;
+        mediumisWinning = false;
+        medium_countMineLeft = MEDIUM_MINE_COUNT;
       }
     }
 
@@ -155,13 +164,11 @@ void difficultymenu::handleEvent(SDL_Event *e)
                 ghardgameplayButtons[i][j].handleEvent(&e);
               }
             }
-            // if (e.key.keysym.sym == SDLK_s)
-            // {
-            //   ghardloadscreen.hardCreateTableWithMine();
-            //   Mix_HaltMusic();
-            // }
+            if (e.key.keysym.sym == SDLK_s)
+            {
+              ghardloadscreen.hardCreateTableWithMine();
+            }
           }
-
           // clear screen
           SDL_RenderClear(gRenderer);
           // Render background

@@ -2,20 +2,20 @@
 #include "Texture.hpp"
 #include "window.hpp"
 
-const int EASY_BUTTON_SPRITE_TOTAL =12;
+const int EASY_BUTTON_SPRITE_TOTAL = 12;
 const int EASY_ROW_SIZE = 11;
 const int EASY_COLUMN_SIZE = 11;
 const int EASY_TILE_SIZE = 32;
 const int EASY_MINE_COUNT = 11;
 
 // Gameplay variables
-extern int easy_countMineLeft ;
-extern int easy_countTileLeft ;
+extern int easy_countMineLeft;
+extern int easy_countTileLeft;
 
-extern bool easygameOver ;
+extern bool easygameOver;
 extern bool easyisWinning;
 
-//In memory text stream
+// In memory text stream
 extern stringstream easymineLeft;
 
 const int EASY_DISTANCE_BETWEEN = (SCREEN_WIDTH - EASY_ROW_SIZE * EASY_TILE_SIZE) / 2;
@@ -38,7 +38,7 @@ public:
     // Shows button sprite
     void render(int i, int j);
 
-    //quitegame
+    // quitegame
     void flagmanager();
 
     bool checkWinning();

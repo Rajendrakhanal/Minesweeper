@@ -5,6 +5,7 @@
 // Gameplay variables
 int medium_countMineLeft = MEDIUM_MINE_COUNT;
 int medium_countTileLeft = MEDIUM_ROW_SIZE * MEDIUM_COLUMN_SIZE;
+
 // Board with mine
 int mediumboard[MEDIUM_ROW_SIZE][MEDIUM_COLUMN_SIZE];
 
@@ -19,6 +20,9 @@ bool mediumisWinning = false;
 
 SDL_Rect gmediumSpriteClips[MEDIUM_BUTTON_SPRITE_TOTAL];
 
+// In memory text stream
+stringstream mediummineLeft;
+
 Lmediumgameplay::Lmediumgameplay()
 {
     mPosition.x = 0;
@@ -31,7 +35,7 @@ void Lmediumgameplay::setPosition(int x, int y)
 }
 void Lmediumgameplay::mediumloadmedia()
 {
-    bool success = true;    // Load sprites
+    bool success = true; // Load sprites
     if (!gButtonSpriteSheetTexture.loadFromFile("resources/Image/Tiles.png"))
     {
         cout << "Failed to load sprites texture!\n";
@@ -56,7 +60,6 @@ void Lmediumgameplay::mediumloadmedia()
             }
         }
     }
-    
 }
 
 void Lmediumgameplay::render(int i, int j)
@@ -180,7 +183,7 @@ void Lmediumgameplay::handleEvent(SDL_Event *e)
 
 void Lmediumgameplay::mediumCreateTableWithMine()
 {
-     srand(time(NULL));
+    srand(time(NULL));
     int mine = 0;
     for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
     {
@@ -219,5 +222,80 @@ void Lmediumgameplay::mediumCreateTableWithMine()
             if (mediumboard[i + 1][j + 1] != 9 && i < MEDIUM_ROW_SIZE - 1 && j < MEDIUM_COLUMN_SIZE - 1)
                 mediumboard[i + 1][j + 1]++;
         }
+    }
+}
+
+void Lmediumgameplay::flagmanager()
+{
+    // Check if win
+    if (mediumisWinning && !mediumgameOver)
+    {
+        // Update screen
+        SDL_RenderPresent(gRenderer);
+
+        // Delay loading screen
+        SDL_Delay(500);
+
+        // Play victory music
+        Mix_PlayMusic(winner, 0);
+
+        // Render winning scene
+        gWinningTexture.render(0, 0);
+
+        // Render playAgain
+        gPlayAgainWinTexture.render((SCREEN_WIDTH - gPlayAgainWinTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainWinTexture.getHeight());
+    }
+    if (mediumgameOver)
+    {
+        // Render background
+        gBackgroundTexture.render(0, 0);
+        // Play losing music
+        Mix_PlayMusic(loser, 0);
+
+        for (int i = 0; i < MEDIUM_ROW_SIZE; i++)
+        {
+            for (int j = 0; j < MEDIUM_COLUMN_SIZE; j++)
+            {
+                smediumBoard[i][j] = mediumboard[i][j];
+                gmediumgameplayButtons[i][j].render(i, j);
+            }
+        }
+        // Render game over text
+        gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2, 0);
+        // Render play again
+        gPlayAgainLoseTexture.render((SCREEN_WIDTH - gPlayAgainLoseTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainLoseTexture.getHeight());
+        // update screen
+        SDL_RenderPresent(gRenderer);
+        SDL_Delay(3000);
+    }
+}
+
+bool Lmediumgameplay::checkWinning()
+{
+    bool win = false;
+    if (medium_countTileLeft == MEDIUM_MINE_COUNT)
+    {
+        win = true;
+    }
+    return win;
+}
+void Lmediumgameplay::mediummineManager()
+{
+    // Render text
+    if (!mediumgameOver && !mediumisWinning)
+    {
+        // Set text color
+        SDL_Color textColor = {140, 140, 140, 255};
+
+        // Erase the buffer
+        mediummineLeft.str("");
+        mediummineLeft << "Flag left: " << medium_countMineLeft;
+        if (!gMineLeftTexture.loadFromRenderedText(mediummineLeft.str().c_str(), textColor))
+        {
+            cout << "Unable to render mine left texture!\n";
+        }
+
+        // Render text
+        gMineLeftTexture.render((SCREEN_WIDTH - gMineLeftTexture.getWidth()) / 2, 0);
     }
 }

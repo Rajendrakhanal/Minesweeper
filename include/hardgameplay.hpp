@@ -1,15 +1,22 @@
 #pragma once
 #include "window.hpp"
 
-const int HARD_BUTTON_SPRITE_TOTAL =12;
+const int HARD_BUTTON_SPRITE_TOTAL = 12;
 const int HARD_ROW_SIZE = 16;
 const int HARD_COLUMN_SIZE = 16;
 const int HARD_TILE_SIZE = 26;
 const int HARD_MINE_COUNT = 20;
 const int HARD_DISTANCE_BETWEEN = (SCREEN_WIDTH - HARD_ROW_SIZE * HARD_TILE_SIZE) / 2;
 
-extern bool hardgameOver ;
-extern bool hardisWinning ;
+// Gameplay variables
+extern int hard_countMineLeft;
+extern int hard_countTileLeft;
+
+// In memory text stream
+extern stringstream hardmineLeft;
+
+extern bool hardgameOver;
+extern bool hardisWinning;
 
 class Lhardgameplay
 {
@@ -28,6 +35,13 @@ public:
     void render(int i, int j);
 
     void hardCreateTableWithMine();
+
+    // quitegame
+    void flagmanager();
+
+    bool checkWinning();
+
+    void hardmineManager();
 
 private:
     // Top left position

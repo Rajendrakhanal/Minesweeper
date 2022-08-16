@@ -13,6 +13,9 @@ int shardBoard[HARD_ROW_SIZE][HARD_COLUMN_SIZE];
 Lhardgameplay ghardgameplayButtons[HARD_ROW_SIZE][HARD_COLUMN_SIZE];
 Lhardgameplay ghardloadscreen;
 
+// In memory text stream
+stringstream hardmineLeft;
+
 bool hardgameOver = false;
 bool hardisWinning = false;
 
@@ -179,7 +182,7 @@ void Lhardgameplay::handleEvent(SDL_Event *e)
 
 void Lhardgameplay::hardCreateTableWithMine()
 {
-     srand(time(NULL));
+    srand(time(NULL));
     int mine = 0;
     for (int i = 0; i < HARD_ROW_SIZE; i++)
     {
@@ -218,5 +221,79 @@ void Lhardgameplay::hardCreateTableWithMine()
             if (hardboard[i + 1][j + 1] != 9 && i < HARD_ROW_SIZE - 1 && j < HARD_COLUMN_SIZE - 1)
                 hardboard[i + 1][j + 1]++;
         }
+    }
+}
+void Lhardgameplay::flagmanager()
+{
+    // Check if win
+    if (hardisWinning && !hardgameOver)
+    {
+        // Update screen
+        SDL_RenderPresent(gRenderer);
+
+        // Delay loading screen
+        SDL_Delay(500);
+
+        // Play victory music
+        Mix_PlayMusic(winner, 0);
+
+        // Render winning scene
+        gWinningTexture.render(0, 0);
+
+        // Render playAgain
+        gPlayAgainWinTexture.render((SCREEN_WIDTH - gPlayAgainWinTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainWinTexture.getHeight());
+    }
+    if (hardgameOver)
+    {
+        // Render background
+        gBackgroundTexture.render(0, 0);
+        // Play losing music
+        Mix_PlayMusic(loser, 0);
+
+        for (int i = 0; i < HARD_ROW_SIZE; i++)
+        {
+            for (int j = 0; j < HARD_COLUMN_SIZE; j++)
+            {
+                shardBoard[i][j] = hardboard[i][j];
+                ghardgameplayButtons[i][j].render(i, j);
+            }
+        }
+        // Render game over text
+        gTextTexture.render((SCREEN_WIDTH - gTextTexture.getWidth()) / 2, 0);
+        // Render play again
+        gPlayAgainLoseTexture.render((SCREEN_WIDTH - gPlayAgainLoseTexture.getWidth()) / 2, SCREEN_HEIGHT - gPlayAgainLoseTexture.getHeight());
+        // update screen
+        SDL_RenderPresent(gRenderer);
+        SDL_Delay(3000);
+    }
+}
+
+bool Lhardgameplay::checkWinning()
+{
+    bool win = false;
+    if (hard_countTileLeft == HARD_MINE_COUNT)
+    {
+        win = true;
+    }
+    return win;
+}
+void Lhardgameplay::hardmineManager()
+{
+    // Render text
+    if (!hardgameOver && !hardisWinning)
+    {
+        // Set text color
+        SDL_Color textColor = {140, 140, 140, 255};
+
+        // Erase the buffer
+        hardmineLeft.str("");
+        hardmineLeft << "Flag left: " << hard_countMineLeft;
+        if (!gMineLeftTexture.loadFromRenderedText(hardmineLeft.str().c_str(), textColor))
+        {
+            cout << "Unable to render mine left texture!\n";
+        }
+
+        // Render text
+        gMineLeftTexture.render((SCREEN_WIDTH - gMineLeftTexture.getWidth()) / 2, 0);
     }
 }

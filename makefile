@@ -16,13 +16,16 @@ OBJ_NAME = minesweeper
 
 Header_DIRECTORY= -Iinclude
 
+$(OBJ_DIRECTORY):
+	mkdir build
+
 OBJ_DIRECTORY= build
 
 CPP_DIR= src
 
 #This is the target that compiles our executable
-all : $(OBJS)
-	$(CC) $(OBJS) -o $(OBJ_NAME) $(LINKER_FLAGS)
+all : $(OBJ_DIRECTORY)  $(OBJS)
+	$(CC) $(OBJS) -o $(OBJ_NAME) $(LINKER_FLAGS) && ./minesweeper
 
 $(OBJ_DIRECTORY)/main.o : $(CPP_DIR)/main.cpp 
 	$(CC) -c $(CPP_DIR)/main.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/main.o
@@ -44,6 +47,9 @@ $(OBJ_DIRECTORY)/mediumgameplay.o : $(CPP_DIR)/mediumgameplay.cpp
 
 $(OBJ_DIRECTORY)/hardgameplay.o : $(CPP_DIR)/hardgameplay.cpp
 	$(CC) -c $(CPP_DIR)/hardgameplay.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/hardgameplay.o
+
+build:
+	mkdir build
 
 clean :
 	rm $(OBJ_DIRECTORY)/*.o

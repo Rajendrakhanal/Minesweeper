@@ -149,42 +149,50 @@ void difficultymenu::handleEvent(SDL_Event *e)
         // While application is running
         while (!quit)
         {
-          // Handle events on queue
-          while (SDL_PollEvent(&e) != 0)
+          while (!quit && !hardgameOver && !hardisWinning)
           {
-            // User requests quit
-            if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+            // Handle events on queue
+            while (SDL_PollEvent(&e) != 0)
             {
-              quit = true;
+              // User requests quit
+              if (e.type == SDL_QUIT || e.key.keysym.sym == SDLK_ESCAPE)
+              {
+                quit = true;
+              }
+              for (int i = 0; i < HARD_ROW_SIZE; i++)
+              {
+                for (int j = 0; j < HARD_COLUMN_SIZE; j++)
+                {
+                  ghardgameplayButtons[i][j].handleEvent(&e);
+                }
+              }
+              if (e.key.keysym.sym == SDLK_s)
+              {
+                ghardloadscreen.hardCreateTableWithMine();
+              }
             }
+            // clear screen
+            SDL_RenderClear(gRenderer);
+            // Render background
+            gBackgroundTexture.render(0, 0);
+            ghardloadscreen.hardmineManager();
+            ghardloadscreen.flagmanager();
+            // Render Text
+            gPlayAgainLoseTexture.render(100, 432);
+            // Render buttons
             for (int i = 0; i < HARD_ROW_SIZE; i++)
             {
               for (int j = 0; j < HARD_COLUMN_SIZE; j++)
               {
-                ghardgameplayButtons[i][j].handleEvent(&e);
+                ghardgameplayButtons[i][j].render(i, j);
               }
             }
-            if (e.key.keysym.sym == SDLK_s)
-            {
-              ghardloadscreen.hardCreateTableWithMine();
-            }
+            // update screen
+            SDL_RenderPresent(gRenderer);
           }
-          // clear screen
-          SDL_RenderClear(gRenderer);
-          // Render background
-          gBackgroundTexture.render(0, 0);
-          // Render Text
-          gPlayAgainLoseTexture.render(100, 432);
-          // Render buttons
-          for (int i = 0; i < HARD_ROW_SIZE; i++)
-          {
-            for (int j = 0; j < HARD_COLUMN_SIZE; j++)
-            {
-              ghardgameplayButtons[i][j].render(i, j);
-            }
-          }
-          // update screen
-          SDL_RenderPresent(gRenderer);
+          hardgameOver = false;
+          hardisWinning = false;
+          hard_countMineLeft = HARD_MINE_COUNT;
         }
       }
     }

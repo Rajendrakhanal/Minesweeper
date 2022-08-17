@@ -294,6 +294,6 @@ void Lhardgameplay::hardmineManager()
         }
 
         // Render text
-        gMineLeftTexture.render((SCREEN_WIDTH - gMineLeftTexture.getWidth()) / 2, 0);
+        gMineLeftTexture.render((SCREEN_WIDTH - gMineLeftTexture.getWidth()) / 2,-5);
     }
 }

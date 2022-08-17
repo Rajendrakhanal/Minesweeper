@@ -129,6 +129,10 @@ void close()
     gWinningTexture.free();
     gTextTexture.free();
 
+    gGameOver = NULL;
+    gPlayAgainLose = NULL;
+    gPlayAgainWin = NULL;
+    
     gWindow = NULL;
     gRenderer = NULL;
 

@@ -30,22 +30,22 @@ all : $(OBJ_DIRECTORY)  $(OBJS)
 $(OBJ_DIRECTORY)/main.o : $(CPP_DIR)/main.cpp 
 	$(CC) -c $(CPP_DIR)/main.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/main.o
 
-$(OBJ_DIRECTORY)/Texture.o : $(CPP_DIR)/Texture.cpp
+$(OBJ_DIRECTORY)/Texture.o : $(CPP_DIR)/Texture.cpp include/Texture.hpp
 	$(CC) -c $(CPP_DIR)/Texture.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/Texture.o
 
-$(OBJ_DIRECTORY)/window.o : $(CPP_DIR)/window.cpp
+$(OBJ_DIRECTORY)/window.o : $(CPP_DIR)/window.cpp include/window.hpp
 	$(CC) -c $(CPP_DIR)/window.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/window.o
 
-$(OBJ_DIRECTORY)/difficultymenu.o : $(CPP_DIR)/difficultymenu.cpp 
+$(OBJ_DIRECTORY)/difficultymenu.o : $(CPP_DIR)/difficultymenu.cpp include/difficultymenu.hpp
 	$(CC) -c $(CPP_DIR)/difficultymenu.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/difficultymenu.o
 
-$(OBJ_DIRECTORY)/easygameplay.o : $(CPP_DIR)/easygameplay.cpp 
+$(OBJ_DIRECTORY)/easygameplay.o : $(CPP_DIR)/easygameplay.cpp include/easygameplay.hpp
 	$(CC) -c $(CPP_DIR)/easygameplay.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/easygameplay.o
 
-$(OBJ_DIRECTORY)/mediumgameplay.o : $(CPP_DIR)/mediumgameplay.cpp
+$(OBJ_DIRECTORY)/mediumgameplay.o : $(CPP_DIR)/mediumgameplay.cpp include/mediumgameplay.hpp
 	$(CC) -c $(CPP_DIR)/mediumgameplay.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/mediumgameplay.o
 
-$(OBJ_DIRECTORY)/hardgameplay.o : $(CPP_DIR)/hardgameplay.cpp
+$(OBJ_DIRECTORY)/hardgameplay.o : $(CPP_DIR)/hardgameplay.cpp include/hardgameplay.hpp
 	$(CC) -c $(CPP_DIR)/hardgameplay.cpp $(Header_DIRECTORY) -o $(OBJ_DIRECTORY)/hardgameplay.o
 
 build:
